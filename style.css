@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@400;700&display=swap');
+
+html {
+    font-family: Exo;
+}
+
+.hidden {
+    display: none;
+}
+
+.dark {
+    background-color: #333333;
+    color: white;
+}
+
+header {
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 30px 0;
+}
+
+#setup-game {
+    display: flex;
+    justify-content: center;
+}
+#setup-game > * {
+    display: flex; 
+    align-items: center;
+    margin-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: 1.2rem;
+}
+button {
+    justify-self: center;
+    margin-top: 20px;
+    font-size: 1.1rem;
+}
+
+p#timer, p#lives {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+#game {
+    display: flex;
+    justify-content: center;
+}
+
+#side-panel > p {
+    border: 1px solid black;
+    border-radius: 20%;
+    width: 50%;
+    font-size: 1.5rem;
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#board {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    width: 600px;
+    height: 600px;
+}
+
+.cell {
+    border: 0.5px solid black;
+    width: 10%;
+    height: 10%;
+    text-align: center;
+    margin: 0;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    font-size: 1.2rem;
+}
+
+p.selected {
+    background-color: lightgrey;
+}
+
+p.incorrect {
+    color: red;
+}
+
+.rightBorder {
+    border-right: 4px solid black;
+}
+
+.bottomBorder {
+    border-bottom: 4px solid black;
+}
+
+footer {
+    color: lightgrey;
+    text-align: center;
+}
