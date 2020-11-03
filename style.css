@@ -8,11 +8,6 @@ html {
     display: none;
 }
 
-.dark {
-    background-color: #333333;
-    color: white;
-}
-
 header {
     text-align: center;
     padding-bottom: 10px;
@@ -42,10 +37,16 @@ button {
     font-size: 1.1rem;
 }
 
+#stats {
+    display: flex;
+    justify-content: center;
+}
+
 p#timer, p#lives {
     font-size: 1rem;
     font-weight: bold;
     text-align: center;
+    padding: 10px 30px;
 }
 
 #game {
@@ -53,11 +54,15 @@ p#timer, p#lives {
     justify-content: center;
 }
 
+#side-panel {
+    margin-top: 3px;
+}
+
 #side-panel > p {
     border: 1px solid black;
-    border-radius: 20%;
+    border-radius: 15%;
     width: 50%;
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-left: 50px;
     margin-top: 20px;
     margin-bottom: 5px;
@@ -79,10 +84,9 @@ p#timer, p#lives {
     width: 10%;
     height: 10%;
     text-align: center;
+    vertical-align: center;
     margin: 0;
-    font-size: 1.5rem;
-    vertical-align: middle;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
 }
 
 p.selected {
