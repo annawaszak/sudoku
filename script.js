@@ -15,11 +15,11 @@ const hard = {
 
 // ALL GLOBAL VARIABLES
 let board;
+let solution;
 let selectedNums;
 let selectedCell;
 let disableSelection;
 let countdown;
-let lives;
 
 window.onload = function() {
     // START GAME 
@@ -56,7 +56,7 @@ function startGame() {
         solution = medium[1][1];
     } else if (document.querySelector('#diff-hard').checked) {
         board = hard[1][0];
-        // solution = hard[1][1];
+        solution = hard[1][1];
     }
     // ENABLE NUMBER SELECTION
     disableSelection = false;
@@ -64,19 +64,15 @@ function startGame() {
     generateBoard(board);
     // START TIMER
     document.querySelector('#timer').classList.remove('hidden');
-    startCountdown()
-
-    // SET LIVES
-    document.querySelector('#lives').classList.remove('hidden');
-    lives = 3;
-    document.querySelector('#lives').textContent = `Lives remaining: ${lives}`
+    startCountdown(board, solution);
     // SET THEME
 
     // SHOW SIDE PANEL
     document.querySelector('#side-panel').classList.remove('hidden');
+    // 
 }
 
-function generateBoard(board, solution) {
+function generateBoard(board) {
     // clear previous boards
     resetGame();
     // create cells<
@@ -99,7 +95,7 @@ function generateBoard(board, solution) {
                         }
                         cell.classList.add('selected');
                         selectedCell = cell;
-                        pickNumber(board, solution)
+                        pickNumber()
                     }
                 }
             })
@@ -121,39 +117,42 @@ function generateBoard(board, solution) {
         }
 }
 
-function pickNumber(board, solution) {
+function pickNumber() {
     if (selectedNum && selectedCell) {
         selectedCell.innerText = selectedNum.innerText;
         selectedNum = null;
         selectedCell = null;
     }
-    win(board, solution)
 }
 
-function startCountdown() {
+function startCountdown(board, solution) {
     let time;
-    if (document.querySelector('#time-5').checked) time = 60;
-    else if (document.querySelector('#time-10').checked) time = 300;
-    else if (document.querySelector('#time-15').checked) time = 600;
+    if (document.querySelector('#time-5').checked) time = 300;
+    else if (document.querySelector('#time-10').checked) time = 600;
+    else if (document.querySelector('#time-15').checked) time = 900;
     else time = 0;
 
     countdown = setInterval(function () {
-        // convert to the right format
+        // convert
         let minutes = Math.floor(time / 60);
         if (minutes < 10 ) minutes = '0' + minutes;
         let seconds = Math.floor(time % 60);
         if (seconds < 10) seconds = '0' + seconds;
-        // 
+        // count down
         time--;
         // display
         document.querySelector('#timer').innerHTML = 'Time remaining: ' + minutes + ':' + seconds;
-        lose()
+        // end
+        if (time === 0) {
+        endGame(board, solution, time)
+        }
         // if (time === 0) {
         //     clearInterval(countdown);
-        //     document.querySelector('#timer').innerHTML = "Time's up!" ;
-        //     lose()
+        //     document.querySelector('#timer').innerHTML = "Time's up!";
         // }
     }, 1000)
+
+    return time;
     
     // timer = setInterval(function () {
     //     // convert to the right format
@@ -170,22 +169,19 @@ function startCountdown() {
     
 }
 
-function win(board, solution) {
-    console.log(board)
-    console.log(solution)
+function endGame(board, solution, time) {
+    // win
     if (board === solution) {
-        alert('You won!')
+        alert('You won!'); //replace with something nicer
+        disableSelection = true;
     }
-    // if time runs out
-    // if lives run out
-
-    // disableSelection = true
-}
-
-function lose() {
-    clearInterval(countdown);
-    document.querySelector('#timer').innerHTML = "Time's up!";
-    lives--;
+    // lose
+    if (time === 0 && board !== solution) {
+        clearInterval(countdown);
+        document.querySelector('#timer').innerHTML = "Time's up!";
+        alert('You lost!'); //replace with something nicer
+        disableSelection = true;
+    }
 }
 
 function resetGame() {
@@ -206,5 +202,16 @@ function resetGame() {
 }
 
 function randomGenerator() {
+    // if (document.querySelector('#diff-easy').checked) {
+    //     board = easy[1][0];
+    //     solution = easy[1][1];
+    // } else if (document.querySelector('#diff-medium').checked) {
+    //     board = medium[1][0];
+    //     solution = medium[1][1];
+    // } else if (document.querySelector('#diff-hard').checked) {
+    //     board = hard[1][0];
+    //     solution = hard[1][1];
+    // }
 
+    // let random = Math.floor(Math.random() *)
 }
