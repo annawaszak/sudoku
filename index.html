@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <h1>Ironhack Sudoku</h1>
+        <h1>Sudoku with a twist</h1>
         <div id="setup-game">
             <div id="diff">
                 <h3>Choose difficulty: </h3>
@@ -32,24 +32,26 @@
         <div id="stats">
             <p id="countdown"></p>
         </div>
+        <div class="popup"></div>
         <div id="game">
             <div id="board"></div>
             <div id="side-panel" class="hidden">
-                <p id="one">1</p>
-                <p id="two">2</p>
-                <p id="three">3</p>
-                <p id="four">4</p>
-                <p id="five">5</p>
-                <p id="six">6</p>
-                <p id="seven">7</p>
-                <p id="eight">8</p>
-                <p id="nine"></p>
+                <p id="*" value="*" >❤️</p>
+                <p id="I" value="I" >I</p>
+                <p id="R" value="R" >R</p>
+                <p id="O" value="O" >O</p>
+                <p id="N" value="N" >N</p>
+                <p id="H" value="H" >H</p>
+                <p id="A" value="A" >A</p>
+                <p id="C" value="C" >C</p>
+                <p id="K" value="K" >K</p>
             </div>
         </div>
     </section>
     <footer>
         <p>Made by Ania</p>
     </footer>
-    <script src="./script.js"></script>
+    <script src="./data.js"></script>
+    <script src="./main.js"></script>
 </body>
 </html>
