@@ -11,10 +11,11 @@ let result; // if true - won; if false - lost
 
 window.onload = function() {
     // START GAME 
-    document.querySelector('#start-btn').addEventListener('click', startGame);
+    console.log(document.querySelector('.diff-easy'))
+    document.querySelector('.start-btn').addEventListener('click', startGame);
     // CHOOSING A NUMBER
     for (let i = 0; i < 9; i++) {
-        let number = document.querySelector('#side-panel').children;
+        let number = document.querySelector('.side-panel').children;
         number[i].addEventListener('click', function() {
             if (!disableSelection) {
                 if (number[i].classList.contains('selected')) {
@@ -27,11 +28,11 @@ window.onload = function() {
                     }
                     number[i].classList.add('selected');
                     selectedNum = number[i];
-                    pickNumber(startBoard, solution);
+                    pickNumber(solution);
                 }
             }
         })
-    }    
+    }
 }
 
 function startGame() {
@@ -45,11 +46,11 @@ function startGame() {
         startBoard = medium[Math.floor(Math.random()*10)+1][0];
         solution = medium[Math.floor(Math.random()*10)+1][1];
     } else if (document.querySelector('#diff-hard').checked) {
-        startBoard = hard[1][0];
-        solution = hard[1][1];
+        startBoard = hard[Math.floor(Math.random()*10)+1][0];
+        solution = hard[Math.floor(Math.random()*10)+1][1];
     } else if (document.querySelector('#diff-expert').checked) {
-        startBoard = expert[1][0];
-        solution = expert[1][1];
+        startBoard = expert[Math.floor(Math.random()*10)+1][0];
+        solution = expert[Math.floor(Math.random()*10)+1][1];
     }
     // SET UP BOARD IN DOM
     updatedBoard = startBoard.split('');
@@ -58,16 +59,20 @@ function startGame() {
     // CREATE BOARD
     generateBoard(startBoard, updatedBoard);
     // START COUNTDOWN
-    document.querySelector('#countdown').classList.remove('hidden');
+    document.querySelector('.countdown').classList.remove('hidden');
     startCountdown(updatedBoard, solution);
-    // SET THEME
-
     // SHOW SIDE PANEL
-    document.querySelector('#side-panel').classList.remove('hidden');
-    // 
+    document.querySelector('.side-panel').classList.remove('hidden');
+    document.querySelector('.side-panel').style.display = 'flex';
+    // ENABLE HINTS
+    document.querySelector('.hint').classList.remove('hidden');
+    document.querySelector('.hint').addEventListener('click', function() {
+        document.querySelector('.hint').classList.toggle('incorrect')
+        giveHint()
+    })
 }
 
-function generateBoard(startBoard, updatedBoard) {
+function generateBoard(startBoard) {
     // clear previous boards
     resetGame();
     // create cells<
@@ -90,7 +95,7 @@ function generateBoard(startBoard, updatedBoard) {
                         }
                         cell.classList.add('selected');
                         selectedCell = cell;
-                        pickNumber(updatedBoard)
+                        pickNumber(solution)
                     }
                 }
             })
@@ -108,19 +113,18 @@ function generateBoard(startBoard, updatedBoard) {
         cell.classList.add('rightBorder')
         }
         // add cells to board
-        document.querySelector('#board').appendChild(cell)
+        document.querySelector('.board').appendChild(cell)
         }
 }
+// function setNumber(solution) {
+// }
 
-function pickNumber() {
+function pickNumber(solution) {
     if (selectedNum && selectedCell) {
         // display the selected number in the selected cell
         selectedCell.innerText = selectedNum.innerText;
         // assign the new number to board in DOM
         updatedBoard[selectedCell.id] = selectedNum.getAttribute('value');
-        console.log('selectedNum', selectedNum)
-        console.log('selectedCell', selectedCell)
-        
         // reset selected cells
         selectedNum = null;
         selectedCell = null;
@@ -129,7 +133,7 @@ function pickNumber() {
 
 function startCountdown(updatedBoard, solution) {
     let time;
-    if (document.querySelector('#time-5').checked) time = 3;
+    if (document.querySelector('#time-5').checked) time = 300;
     else if (document.querySelector('#time-10').checked) time = 600;
     else if (document.querySelector('#time-15').checked) time = 900;
     else time = 0;
@@ -143,51 +147,20 @@ function startCountdown(updatedBoard, solution) {
         // count down
         time--;
         // display
-        document.querySelector('#countdown').innerHTML = 'Time remaining: ' + minutes + ':' + seconds;
+        document.querySelector('.countdown').innerHTML = 'Time remaining: ' + minutes + ':' + seconds;
         // end
         endGame(updatedBoard, solution, time)
     }, 1000)
-
     return time;
-    
-    // timer = setInterval(function () {
-    //     // convert to the right format
-    //     let minutes = Math.floor(time / 60);
-    //     if (minutes < 10 ) minutes = '0' + minutes;
-    //     let seconds = Math.floor(time % 60);
-    //     if (seconds < 10) seconds = '0' + seconds;
-    //     // 
-    //     time++;
-    //     console.log(time)
-    //     // display
-    //     document.querySelector('#timer').innerHTML = 'Time: ' + minutes + ':' + seconds;
-    // }, 1000)
-    
-}
+};
 
-function endGame(updatedBoard, solution, time) {
-    
-    // win
-    if (updatedBoard.join('') === solution) {
-        clearInterval(countdown);
-        document.querySelector('#countdown').innerHTML = "You won!!";
-        result = true;
-        popup(result);
-        disableSelection = true;
-    }
-    // lose
-    if (time === -2 && updatedBoard.join('') !== solution) {
-        clearInterval(countdown);
-        document.querySelector('#countdown').innerHTML = "Time's up!";
-        result = false;
-        popup(result);
-        disableSelection = true;
-    }
-}
-
-// function giveHint(updatedBoard, solution) {
-//     if (updatedDOM[selectedCell.id] !== solution)
-// }
+function giveHint(selectedCell, solution) {
+    // if (document.querySelector('.hint').classList.containts('incorrect')) {
+        if (updatedBoard.join('')[selectedCell.id] !== solution[selectedCell.id]) {
+            selectedCell.style.color = 'red';
+        }
+    // }
+};
 
 function popup(result) {
     const images = result ? winImages : loseImages;
@@ -197,6 +170,26 @@ function popup(result) {
     setTimeout(() => { 
         popup.style.display = "none";
     }, 5000);
+};
+
+function endGame(updatedBoard, solution, time) {
+    
+    // win
+    if (updatedBoard.join('') === solution) {
+        clearInterval(countdown);
+        document.querySelector('.countdown').innerHTML = "You won!!";
+        result = true;
+        popup(result);
+        disableSelection = true;
+    }
+    // lose
+    if (time === -2 && updatedBoard.join('') !== solution) {
+        clearInterval(countdown);
+        document.querySelector('.countdown').innerHTML = "Time's up!";
+        result = false;
+        popup(result);
+        disableSelection = true;
+    }
 }
 
 function resetGame() {
@@ -209,11 +202,11 @@ function resetGame() {
     if (countdown) clearTimeout(countdown);
     // deselect any numbers
     for (let i = 0; i < 9; i++) {
-        document.querySelector('#side-panel').children[i].classList.remove('selected');
+        document.querySelector('.side-panel').children[i].classList.remove('selected');
     }
     // clear selected variables
     selectedCell = null;
     selectedNum = null;
     // hide side panel
-    document.querySelector('#side-panel').classList.add('hidden');
+    document.querySelector('.side-panel').classList.add('hidden');
 }

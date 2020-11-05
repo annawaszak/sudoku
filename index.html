@@ -11,14 +11,15 @@
 <body>
     <header>
         <h1>Sudoku with a twist</h1>
-        <div id="setup-game">
-            <div id="diff">
+        <div class="setup-game">
+            <div class="diff">
                 <h3>Choose difficulty: </h3>
                 <label for="diff-easy"><input id="diff-easy" type="radio" name="diff" value="easy" checked>Easy</label>
                 <label for="diff-medium"><input id="diff-medium" type="radio" name="diff" value="medium">Medium</label>
                 <label for="diff-hard"><input id="diff-hard" type="radio" name="diff" value="hard">Hard</label>
+                <label for="diff-expert"><input id="diff-expert" type="radio" name="diff" value="expert">Expert</label>
             </div>
-            <div id="time">
+            <div class="time">
                 <h3>Choose time: </h3>
                 <label for="time-5"><input id="time-5" type="radio" name="time" value="5" checked>5 min</label>
                 <label for="time-10"><input id="time-10" type="radio" name="time" value="10">10 min</label>
@@ -26,16 +27,16 @@
                 <!-- <label for="time-no"><input id="time-no" type="radio" name="time" value="no-limit">No limit</label> -->
             </div>
         </div>
-        <button id="start-btn">New Game</button>
+        <button class="start-btn">New Game</button>
     </header>
     <section>
-        <div id="stats">
-            <p id="countdown"></p>
+        <div>
+            <p class="countdown"></p>
         </div>
         <div class="popup"></div>
-        <div id="game">
-            <div id="board"></div>
-            <div id="side-panel" class="hidden">
+        <div class="game">
+            <div class="board"></div>
+            <div class="side-panel hidden">
                 <p id="*" value="*" >❤️</p>
                 <p id="I" value="I" >I</p>
                 <p id="R" value="R" >R</p>
@@ -47,6 +48,7 @@
                 <p id="K" value="K" >K</p>
             </div>
         </div>
+        <button class="hint hidden">Hint</button>
     </section>
     <footer>
         <p>Made by Ania</p>
