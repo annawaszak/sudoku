@@ -24,7 +24,7 @@
                 <label for="time-5"><input id="time-5" type="radio" name="time" value="5" checked>5 min</label>
                 <label for="time-10"><input id="time-10" type="radio" name="time" value="10">10 min</label>
                 <label for="time-15"><input id="time-15" type="radio" name="time" value="15">15 min</label>
-                <!-- <label for="time-no"><input id="time-no" type="radio" name="time" value="no-limit">No limit</label> -->
+                <label for="time-no"><input id="time-no" type="radio" name="time" value="no-limit">No limit</label>
             </div>
         </div>
         <button class="start-btn">New Game</button>
@@ -48,7 +48,12 @@
                 <p id="K" value="K" >K</p>
             </div>
         </div>
-        <button class="hint hidden">Hint</button>
+        <div class="help">
+            <button class="hint hidden" title="Check whether the particular cell is accurate">Get a hint</button>
+            <button class="mistakes hidden" title="See all the mistakes you made">Show mistakes</button>
+            <button class="solution hidden" title="See the solution">Show solution</button>
+
+        </div>
     </section>
     <footer>
         <p>Made by Ania</p>

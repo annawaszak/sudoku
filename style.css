@@ -44,7 +44,7 @@ p {
     padding-right: 50px;
     font-size: 1.2rem;
 }
-button {
+.start-btn {
     /* justify-self: center; */
     /* margin-top: 20px; */
     padding: 15px 30px;
@@ -105,14 +105,6 @@ button {
     font-size: 2rem;
 }
 
-.selected {
-    background-color: lightgrey;
-}
-
-.incorrect {
-    color: red;
-}
-
 .rightBorder {
     border-right: 4px solid black;
 }
@@ -135,11 +127,35 @@ button {
     background-size: contain;
 }
 
-.hint {
-    /* text-align: center; */
-    background-color: #19d3da;
-    color: white;
-    border: 1px solid  #19d3da;
+.help {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+
+.hint, .mistakes, .solution {
+    padding: 10px 20px;
+    font-family: Exo;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #373a40;
+    background-color: white;
+    border: 1px solid  ##373a40;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+.selected {
+    background-color: lightgrey;
+}
+
+.incorrect {
+    color: #19d3da;
+}
+.active {
+    top: 2px;
+    right: 2px;
+    box-shadow: 0 0 10px #19d3da;
 }
 
 footer {

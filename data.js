@@ -100,5 +100,5 @@ const expert = {
     '10': [ '----H--IA--------N--O-K*-C---C-----O---OR-----A--C--R-R----K--*AI-*------K----I--', 'K*RCHNOIAHCAIORK*NINOAK*HCRNRCK*IAHO*HIORANKCOAKNCH*RIRONHIKCA*AIH*NCROKCK*RAOINH' ]
   }
 
-const loseImages = ['lose1.gif','lose2.gif', 'lose3.gif'];
-const winImages = ['win1.gif', 'win2.gif', 'win3.gif'];
+const loseImages = ['lose1.gif','lose2.gif', 'lose3.gif', 'lose4.gif', 'lose5.gif', 'lose6.gif', 'lose7.gif'];
+const winImages = ['win1.gif', 'win2.gif', 'win3.gif', 'win4.gif', 'win5.gif', 'win6.gif', 'win7.gif'];
