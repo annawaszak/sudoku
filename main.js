@@ -22,10 +22,10 @@ function startGame() {
     // SET BOARD DIFFICULTY
     random = Math.floor(Math.random()*10)+1;
     if (document.querySelector('#diff-easy').checked) {
-        startBoard = test[1][0];
-        solution = test[1][1];
-        // startBoard = easy[random][0];
-        // solution = easy[random][1];
+        // startBoard = test[1][0];
+        // solution = test[1][1];
+        startBoard = easy[random][0];
+        solution = easy[random][1];
     } else if (document.querySelector('#diff-medium').checked) {
         startBoard = medium[random][0];
         solution = medium[random][1];
@@ -149,9 +149,9 @@ function setNumber() {
 
 function countdownOrTimer() {
     document.querySelector('.countdown').classList.remove('hidden');
-    let time = 3595;
+    let time = 0;
     if (document.querySelector('#time-5').checked) {
-        time = 5;
+        time = 300;
         startCountdown(time);
     } else if (document.querySelector('#time-10').checked) {
         time = 600;
@@ -334,7 +334,11 @@ function resetGame() {
     selectedNum = null;
     // hide side panel
     document.querySelector('.side-panel').classList.add('hidden');
+<<<<<<< HEAD
     // deactivate and  hide help buttons
+=======
+    // hide help buttons
+>>>>>>> 3bd40ef6b1dadc917ef8e61c3de05c4ac56dabd9
     document.querySelector('.hint').classList.remove('active');
     document.querySelector('.hint').classList.add('hidden');
     document.querySelector('.mistakes').classList.remove('active');
