@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;700&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css"> -->
     <title>Sudoku</title>
 </head>
 <body>
@@ -33,7 +32,9 @@
         <div>
             <p class="countdown"></p>
         </div>
-        <div class="popup"></div>
+        <div class="popup">
+            <img src="" alt="giphy">
+        </div>
         <div class="game">
             <div class="board"></div>
             <div class="side-panel hidden">
@@ -49,10 +50,10 @@
             </div>
         </div>
         <div class="help">
+            <button class="clean-board hidden" title="Start over">Clean board</button>
             <button class="hint hidden" title="Check whether the particular cell is accurate">Get a hint</button>
             <button class="mistakes hidden" title="See all the mistakes you made">Show mistakes</button>
             <button class="solution hidden" title="See the solution">Show solution</button>
-
         </div>
     </section>
     <footer>

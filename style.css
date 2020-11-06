@@ -13,6 +13,7 @@ header {
     background-color: #373a40;
     color: white;
     text-align: center;
+    padding-top: 30px;
     padding-bottom: 20px;
     margin-top: 0;
     border-bottom: 1px solid #ccc;
@@ -61,7 +62,7 @@ p {
     font-weight: 300;
     color: #686d76;
     text-align: center;
-    padding: 30px;
+    padding: 50px;
 }
 
 .game {
@@ -115,16 +116,19 @@ p {
 
 .popup {
     display: none;
-    margin-top: 50px;
-    padding-left: 50px;
+    margin-top: 40px;
+    padding-left: 40px;
     position: absolute;
-    top: 10vh;
-    left: 10vw;
+    top: 30vh;
+    left: 30vw;
     background-color: White;
     border: 5px solid black;
-    width: 500px;
-    height : 300px;
+    width: 50%;
+    height : 0;
+    padding-top: 40%;
+    padding-bottom: 0px;
     background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .help {
@@ -133,14 +137,14 @@ p {
     margin: 50px;
 }
 
-.hint, .mistakes, .solution {
+.hint, .mistakes, .solution, .clean-board {
     padding: 10px 20px;
     font-family: Exo;
     font-size: 1rem;
     font-weight: bold;
     color: #373a40;
     background-color: white;
-    border: 1px solid  ##373a40;
+    border: 1px solid #373a40;
     margin-right: 50px;
     margin-left: 50px;
 }
@@ -150,7 +154,7 @@ p {
 }
 
 .incorrect {
-    color: #19d3da;
+    background-color: #aaf2f5;
 }
 .active {
     top: 2px;

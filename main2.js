@@ -316,6 +316,8 @@ function popup(result) {
     }, 5000);
 };
 
+
+
 function resetGame() {
     // clear board
     let cells = document.querySelectorAll('.cell');
