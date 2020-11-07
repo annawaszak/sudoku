@@ -234,8 +234,11 @@ function showMistakes(updatedBoard, solution) {
     document.querySelector('.mistakes').addEventListener('click', function() {
         document.querySelector('.mistakes').classList.toggle('active');
         if (document.querySelector('.mistakes').classList.contains('active')) {
+            // console.log('board', updatedBoard.join(''), 'solution', solution)
             for (let i = 0; i < 81; i++) {
-                if (updatedBoard.join('')[i] !== solution[i] && updatedBoard.join('')[i] !== '-') {
+                if (updatedBoard.join('')[i] === '-') {
+                    continue;
+                } else if (updatedBoard.join('')[i] !== solution[i]) {
                     console.log('board', i, updatedBoard.join('')[i], 'solution', solution[i])
                     document.querySelectorAll('.cell')[i].classList.add('incorrect');
                     disableSelection = true;
@@ -334,11 +337,7 @@ function resetGame() {
     selectedNum = null;
     // hide side panel
     document.querySelector('.side-panel').classList.add('hidden');
-<<<<<<< HEAD
     // deactivate and  hide help buttons
-=======
-    // hide help buttons
->>>>>>> 3bd40ef6b1dadc917ef8e61c3de05c4ac56dabd9
     document.querySelector('.hint').classList.remove('active');
     document.querySelector('.hint').classList.add('hidden');
     document.querySelector('.mistakes').classList.remove('active');
