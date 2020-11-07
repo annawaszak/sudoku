@@ -14,9 +14,7 @@ let random;
 window.onload = function() {
     // START GAME 
     document.querySelector('.start-btn').addEventListener('click', startGame);
-    // CHOOSING A NUMBER
-    pickCell();
-}
+};
 
 function startGame() {
     // SET BOARD DIFFICULTY
@@ -35,7 +33,7 @@ function startGame() {
     } else if (document.querySelector('#diff-expert').checked) {
         startBoard = expert[random][0];
         solution = expert[random][1];
-    }
+    };
     // SET UP BOARD IN DOM
     updatedBoard = startBoard.split('');
     // ENABLE NUMBER SELECTION
@@ -43,24 +41,26 @@ function startGame() {
     // CREATE BOARD
     generateBoard(startBoard);
     // START COUNTDOWN/TIMER
-    resetTimer()
+    resetTimer();
     countdownOrTimer();
     // generate everything besides the board
-    generateSide()
+    generateSide();
 }
 
 function generateSide() {
-     // SHOW SIDE PANEL
-     document.querySelector('.side-panel').classList.remove('hidden');
-     document.querySelector('.side-panel').style.display = 'flex';
-     // ENABLE CLEANING THE BOARD
-     cleanBoard(startBoard)
-     // ENABLE HINTS
-     // giveHint()
-     // ENABLE SHOW MISTAKES
-     showMistakes(updatedBoard, solution);
-      // ENABLE SHOW SOLUTION
-     showSolution(solution)
+    // SHOW SIDE PANEL
+    document.querySelector('.side-panel').classList.remove('hidden');
+    document.querySelector('.side-panel').style.display = 'flex';
+    // ENABLE CLEANING THE BOARD
+    cleanBoard(startBoard);
+    // CHOOSING A NUMBER
+    pickCell();
+    // ENABLE HINTS
+    // giveHint(selectedCell, solution);
+    // ENABLE SHOW MISTAKES
+    showMistakes(updatedBoard, solution, selectedNum, selectedCell);
+    // ENABLE SHOW SOLUTION
+    showSolution(solution);
 }
 
 function generateBoard(startBoard) {
@@ -70,7 +70,7 @@ function generateBoard(startBoard) {
     let cellCount = 0;
     for (let i = 0; i < 81; i++) {
         let cell = document.createElement('p')
-        // set the 
+        // set the layout
         if (startBoard[i] != "-" && startBoard[i] != "*") {
             cell.textContent = startBoard[i];
         } else if (startBoard[i] === "*") {
@@ -108,7 +108,6 @@ function generateBoard(startBoard) {
         // add cells to board
         document.querySelector('.board').appendChild(cell)
     }
-    console.log(updatedBoard, solution)
 };
 
 // function  pickCell
@@ -139,13 +138,16 @@ function setNumber() {
         // display the selected number in the selected cell
         selectedCell.innerText = selectedNum.innerText;
         // assign the new number to board in DOM
-        updatedBoard[selectedCell.id] = selectedNum.getAttribute('value');
+        updatedBoard[selectedCell.id] = selectedNum.innerText;
+        // giveHint(selectedCell, solution)
+        showMistakes(updatedBoard, solution, selectedCell);
         winGame(updatedBoard, solution)
         // reset selected cells
         selectedNum = null;
         selectedCell = null;
     }
 };
+
 
 function countdownOrTimer() {
     document.querySelector('.countdown').classList.remove('hidden');
@@ -215,18 +217,44 @@ function cleanBoard(startBoard) {
     });
 };
 
-// function giveHint(updatedBoard, selectedCell, solution) {
+// function giveHint(selectedCell, solution) {
 //     document.querySelector('.hint').classList.remove('hidden');
 //     document.querySelector('.hint').addEventListener('click', function() {
 //         document.querySelector('.hint').classList.toggle('active')
-//         if (document.querySelector('.hint').classList.containts('incorrect')) {
-//             if (updatedBoard.join('')[selectedCell.id] !== solution[selectedCell.id]) {
-//             console.log("updatedBoard.join('')[selectedCell.id]", updatedBoard.join('')[selectedCell.id])
-//             console.log("solution[selectedCell.id]", solution[selectedCell.id])
-//             selectedCell.style.color = 'red';
-//             }
+//         console.log("selectedCell.innerText", selectedCell.innerText, "solution", solution[selectedCell.id])
+//         if (selectedCell.innerText !== solution[selectedCell.id]) {
+//             console.log("selectedCell.innerText", selectedCell.innerText, "solution", solution[selectedCell.id])
+//             selectedCell.classList.add('incorrect');
 //         }
 //     });  
+// };
+
+// function showMistakes(updatedBoard, solution, selectedCell) {
+//     document.querySelector('.mistakes').classList.remove('hidden');
+//     document.querySelector('.mistakes').addEventListener('click', function() {
+//         document.querySelector('.mistakes').classList.toggle('active');
+//         if (document.querySelector('.mistakes').classList.contains('active')) {
+//             // console.log('board', updatedBoard.join(''), 'solution', solution)
+//             for (let i = 0; i < 81; i++) {
+//                 if (updatedBoard.join('')[i] === '-') {
+//                     continue;
+//                 } else if (updatedBoard.join('')[i] !== solution[i]) {
+//                     console.log(i, 'board', updatedBoard.join('')[i], 'solution', solution[i], 'selectedCell', selectedCell)
+//                     document.querySelectorAll('.cell')[i].classList.add('incorrect');
+//                     // disableSelection = true;
+//                 }
+//                 if (selectedCell.innerText !== solution[selectedCell.id]) {
+//                     console.log("selectedCell.innerText", selectedCell.innerText, "solution", solution[selectedCell.id])
+//                     selectedCell.classList.add('incorrect');
+//                 }
+//             }
+//         } else {
+//             for (let i = 0; i < 81; i++) {
+//                 document.querySelectorAll('.cell')[i].classList.remove('incorrect');
+//                 // disableSelection = false;
+//             }
+//         };
+//     });
 // };
 
 function showMistakes(updatedBoard, solution) {
@@ -234,12 +262,10 @@ function showMistakes(updatedBoard, solution) {
     document.querySelector('.mistakes').addEventListener('click', function() {
         document.querySelector('.mistakes').classList.toggle('active');
         if (document.querySelector('.mistakes').classList.contains('active')) {
-            // console.log('board', updatedBoard.join(''), 'solution', solution)
             for (let i = 0; i < 81; i++) {
                 if (updatedBoard.join('')[i] === '-') {
                     continue;
                 } else if (updatedBoard.join('')[i] !== solution[i]) {
-                    console.log('board', i, updatedBoard.join('')[i], 'solution', solution[i])
                     document.querySelectorAll('.cell')[i].classList.add('incorrect');
                     disableSelection = true;
                 } 
@@ -276,23 +302,6 @@ function showSolution(solution) {
      });
 };
 
-// for (let i = 0; i < 81; i++) {
-//     document.querySelectorAll('.cell')[i].textContent = solution[i];
-//     disableSelection = true;
-//     clearInterval(countdown);
-//     document.querySelector('.countdown').innerHTML = "You gave up :( <br> Click 'New Game' to try again";
-// }
-
-// function popup(result) {
-//     const images = result ? winImages : loseImages;
-//     const popup = document.querySelector(".popup");
-//     popup.style.backgroundImage = `url(./resources/${images[Math.floor(Math.random() * images.length)]})`;
-//     popup.style.display = "block";
-//     setTimeout(() => { 
-//         popup.style.display = "none";
-//     }, 10000000);
-// };
-
 function winGame(updatedBoard, solution) {
     if (updatedBoard.join('') === solution) {
         clearInterval(countdown);
@@ -304,7 +313,6 @@ function winGame(updatedBoard, solution) {
 };
 
 function loseGame() {
-    console.log('test')
     clearInterval(countdown);
     document.querySelector('.countdown').innerHTML = "Time's up!";
     result = false;
