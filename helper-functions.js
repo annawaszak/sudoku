@@ -72,23 +72,6 @@ function solveSudoku(string) {
 }
 
 // return entire object with solved sudokus
-function addSolvedSudokuToObject(obj) {
-    for (let i = 0; i < Object.values(obj).length; i++) {
-        Object.values(obj)[i][1] = solveSudoku(Object.values(obj)[i][0]);
-    }
-    return obj;
-}
-
-// console.log(addSolvedSudokuToObject(easyWithNumbers))
-
-// let step1 = convertIntoArray('RI*HCNOKAHOAI*KNCRKCNARO*IHNHIOARC*KOKRCN*AHIA*CKIHRNOIAONHCKR**NKROIHACCRH*KAION')
-// console.log(step1)
-// let step2 = solve(step1)
-// console.log(step2)
-// let result = convertIntoString(step2)
-// console.log(result)
-
-// console.log(solveSudoku(hard[1][0]))
 
 // replace numbers with letter/symbols in the entire object
 

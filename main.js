@@ -18,7 +18,7 @@ window.onload = function() {
 
 function startGame() {
     // SET BOARD DIFFICULTY
-    random = Math.floor(Math.random()*10)+1;
+    random = Math.floor(Math.random() * 10) + 1;
     if (document.querySelector('#diff-easy').checked) {
         // startBoard = test[1][0];
         // solution = test[1][1];
@@ -148,7 +148,6 @@ function setNumber() {
     }
 };
 
-
 function countdownOrTimer() {
     document.querySelector('.countdown').classList.remove('hidden');
     let time = 0;
@@ -178,7 +177,7 @@ function startCountdown(time) {
         // display
         document.querySelector('.countdown').innerHTML = 'Time remaining: ' + minutes + ':' + seconds;
         // end
-        if (time == 86400) {
+        if (time == 0) {
             loseGame()
         }
     }, 1000)
@@ -216,46 +215,6 @@ function cleanBoard(startBoard) {
         document.querySelector('.clean-board').classList.remove('active');
     });
 };
-
-// function giveHint(selectedCell, solution) {
-//     document.querySelector('.hint').classList.remove('hidden');
-//     document.querySelector('.hint').addEventListener('click', function() {
-//         document.querySelector('.hint').classList.toggle('active')
-//         console.log("selectedCell.innerText", selectedCell.innerText, "solution", solution[selectedCell.id])
-//         if (selectedCell.innerText !== solution[selectedCell.id]) {
-//             console.log("selectedCell.innerText", selectedCell.innerText, "solution", solution[selectedCell.id])
-//             selectedCell.classList.add('incorrect');
-//         }
-//     });  
-// };
-
-// function showMistakes(updatedBoard, solution, selectedCell) {
-//     document.querySelector('.mistakes').classList.remove('hidden');
-//     document.querySelector('.mistakes').addEventListener('click', function() {
-//         document.querySelector('.mistakes').classList.toggle('active');
-//         if (document.querySelector('.mistakes').classList.contains('active')) {
-//             // console.log('board', updatedBoard.join(''), 'solution', solution)
-//             for (let i = 0; i < 81; i++) {
-//                 if (updatedBoard.join('')[i] === '-') {
-//                     continue;
-//                 } else if (updatedBoard.join('')[i] !== solution[i]) {
-//                     console.log(i, 'board', updatedBoard.join('')[i], 'solution', solution[i], 'selectedCell', selectedCell)
-//                     document.querySelectorAll('.cell')[i].classList.add('incorrect');
-//                     // disableSelection = true;
-//                 }
-//                 if (selectedCell.innerText !== solution[selectedCell.id]) {
-//                     console.log("selectedCell.innerText", selectedCell.innerText, "solution", solution[selectedCell.id])
-//                     selectedCell.classList.add('incorrect');
-//                 }
-//             }
-//         } else {
-//             for (let i = 0; i < 81; i++) {
-//                 document.querySelectorAll('.cell')[i].classList.remove('incorrect');
-//                 // disableSelection = false;
-//             }
-//         };
-//     });
-// };
 
 function showMistakes(updatedBoard, solution) {
     document.querySelector('.mistakes').classList.remove('hidden');
